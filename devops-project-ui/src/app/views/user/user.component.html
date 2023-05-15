@@ -1,0 +1,87 @@
+<body>
+  <div class="container view">
+    <div class="mb-3">
+      <h1>Tabla de usuarios</h1>
+    </div>
+
+    <table class="table table-hover table-bordered text-center">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">ID</th>
+          <th scope="col">Nombres </th>
+          <th scope="col">Apellido Paterno</th>
+          <th scope="col">Apellido Materno</th>
+          <th scope="col">Edad</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="usuarios:${usuarios}">
+
+          <td>
+            <input class="form-check-input" type="checkbox" th:value="${usuarios.ID}">
+          </td>
+
+          <td th:text="${usuarios.ID}"></td>
+          <td th:text="${usuarios.Nombres}"></td>
+          <td th:text="${usuarios.ApellidoPaterno}"></td>
+          <td th:text="${usuarios.ApellidoMaterno}"></td>
+          <td th:text="${usuarios.Edad}"></td>
+          <td>
+            <a th:href="@{/editar/}+${usuarios.ID}" type="button" class="btn btn-warning">Editar</a>
+          </td>
+          <td>
+            <a th:onclick="eliminar([[${usuarios.ID}]])" type="button" class="btn btn-danger">Eliminar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="button-group">
+      <a th:href="@{/new}" type="button" class="btn btn-success" (click)="openPopup()">Agregar</a>
+
+      <a th:onclick="eliminarVarios()" type="button" class="btn btn-danger">Eliminar selecionados</a>
+
+    </div>
+
+  </div>
+
+  <div class="container popup">
+
+    <div class="popup-content">
+      <button class="close-button" (click)="closePopup()">X</button>
+
+      <form th:action="@{/save}" th:object=${usuario} method="POST">
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Nombres</label>
+          <input th:field="*{Nombres}" type="text" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Apellido Paterno</label>
+          <input th:field="*{ApellidoPaterno}" type="text" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Apellido Materno</label>
+          <input th:field="*{ApellidoMaterno}" type="text" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Edad</label>
+          <input th:field="*{Edad}" type="number" class="form-control" required>
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Guardar">
+      </form>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
