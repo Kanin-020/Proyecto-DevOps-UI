@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class RegisterComponent implements OnInit {
   userData: any = {};
   formItem!: FormGroup;
 
-  constructor(private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     this.formItem = new FormGroup({
@@ -28,7 +29,8 @@ export class RegisterComponent implements OnInit {
 
     if (password == passwordConfirmation) {
       this.userService.registerUser(username, email, password).subscribe();
-    }else{
+      this.router.navigate(['/login']);
+    } else {
       alert("Las contraseñas no coinciden");
     }
   }

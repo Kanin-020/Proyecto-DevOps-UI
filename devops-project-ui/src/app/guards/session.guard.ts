@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { SharedDataService } from '../services/shared/sharedData.service';
 
 @Injectable()
 export class SessionGuard implements CanActivate {
 
     sessionToken: string = '';
 
-    constructor(private router: Router, private sharedDataService: SharedDataService,) { }
+    constructor(private router: Router) { }
 
     canActivate(): boolean {
         // Verificar la sesión del usuario aquí

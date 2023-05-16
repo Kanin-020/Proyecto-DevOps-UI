@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,9 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
 
   private readonly apiUrl = 'http://localhost:5000';
+  private readonly token = localStorage.getItem('token');
+  private readonly secretKey = localStorage.getItem('secretKey');
+
 
   constructor(private readonly http: HttpClient) { }
 
@@ -23,21 +26,32 @@ export class UserService {
   }
 
   getUserList() {
-    return this.http.get(`${this.apiUrl}/users/getAll`);
+    const headers = new HttpHeaders().set('Authorization', `${this.token}`);
+    const params = new HttpParams().set('secretKey', `${this.secretKey}`);
+
+    return this.http.get(`${this.apiUrl}/users/getAll`, { headers, params });
   }
 
   getUserById(userId: string) {
-    return this.http.get(`${this.apiUrl}/users/getUser/${userId}`);
+    const headers = new HttpHeaders().set('Authorization', `${this.token}`);
+    const params = new HttpParams().set('secretKey', `${this.secretKey}`);
+
+    return this.http.get(`${this.apiUrl}/users/getUser/${userId}`, { headers, params });
   }
 
   updateUserInfo(userId: string, username: string, email: string, password: string) {
+    const headers = new HttpHeaders().set('Authorization', `${this.token}`);
+    const params = new HttpParams().set('secretKey', `${this.secretKey}`);
     const body = { username, email, password };
 
-    return this.http.put(`${this.apiUrl}/users/update/${userId}`, body);
+    return this.http.put(`${this.apiUrl}/users/update/${userId}`, body, { headers, params });
   }
 
   deleteUser(userId: string) {
-    return this.http.delete(`${this.apiUrl}/users/delete/${userId}`);
+    const headers = new HttpHeaders().set('Authorization', `${this.token}`);
+    const params = new HttpParams().set('secretKey', `${this.secretKey}`);
+
+    return this.http.delete(`${this.apiUrl}/users/delete/${userId}`, { headers, params });
   }
 
 }

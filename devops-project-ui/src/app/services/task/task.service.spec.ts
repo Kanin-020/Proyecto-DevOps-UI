@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { SharedDataService } from './sharedData.service';
+import { TaskService } from './task.service';
 
-describe('Service: SharedData', () => {
+describe('Service: Task', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SharedDataService]
+      providers: [TaskService]
     });
   });
 
-  it('should ...', inject([SharedDataService], (service: SharedDataService) => {
+  it('should ...', inject([TaskService], (service: TaskService) => {
     expect(service).toBeTruthy();
   }));
 });
