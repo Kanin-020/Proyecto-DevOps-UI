@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user/user.service';
+import { SessionGuard } from 'src/app/guards/session.guard';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.css'],
+  providers: [SessionGuard]
 })
 export class UserComponent implements OnInit {
 
 
-  constructor() {
+  constructor(private sessionGuard: SessionGuard) {
 
   }
 
@@ -17,20 +18,8 @@ export class UserComponent implements OnInit {
 
   }
 
-  openPopup() {
-    const popup: HTMLElement | null = document.querySelector(".popup");
-
-    if (popup) {
-      popup.style.display = "block"; 
-    }
-  }
-
-  closePopup() {
-    const popup: HTMLElement | null = document.querySelector(".popup");
-
-    if (popup) {
-      popup.style.display = "none";
-    }
+  addUser() {
+    console.log("Hola");
   }
 
 }

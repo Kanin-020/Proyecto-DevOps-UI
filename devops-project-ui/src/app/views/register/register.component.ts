@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  userData: any = {};
+  formItem!: FormGroup;
+
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.formItem = new FormGroup({
+      username: new FormControl(this.userData.username, Validators.required),
+      email: new FormControl(this.userData.email, Validators.required),
+      password: new FormControl(this.userData.password, Validators.required),
+      passwordConfirmation: new FormControl(this.userData.passwordConfirmation, Validators.required),
+    });
+  }
+
+  userRegister() {
+    const { username, email, password, passwordConfirmation } = this.userData;
+
+    if (password == passwordConfirmation) {
+      this.userService.registerUser(username, email, password).subscribe();
+    }else{
+      alert("Las contraseñas no coinciden");
+    }
   }
 
 }
