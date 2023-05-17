@@ -1,0 +1,35 @@
+pipeline {
+  agent any
+  stages {
+    stage('Clonar repositorio') {
+      steps {
+          git branch: 'develop', url: 'https://github.com/Kanin-020/Proyecto-DevOps-UI.git'
+        }
+      }
+    stage('Ingresar en la carpeta del proyecto'){
+        steps {
+            powershell 'cd devops-project-ui'
+        }
+    }
+    stage('Instalar dependencias') {
+      steps {
+        powershell 'npm install'
+      }
+    }
+    stage('Ejecutar pruebas') {
+      steps {
+        powershell 'npm test' 
+      }
+    }
+    stage('Detener contenedores'){
+      steps{
+        powershell 'docker stop $(docker ps -q --filter "publish=4200")'
+      }
+    }
+    stage('Desplegar') {
+      steps {
+        build job: 'Proyecto-Final-Devops-Angular-Despliegue', propagate: false
+      }
+    }
+  }
+}
