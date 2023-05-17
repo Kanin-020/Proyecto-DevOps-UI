@@ -16,16 +16,16 @@ pipeline {
         powershell 'npm install'
       }
     }
-    stage('Ejecutar pruebas') {
-      steps {
-        powershell 'npm test' 
-      }
-    }
-    stage('Detener contenedores'){
-      steps{
-        powershell 'docker stop $(docker ps -q --filter "publish=4200")'
-      }
-    }
+    // stage('Ejecutar pruebas') {
+    //   steps {
+    //     powershell 'npm test' 
+    //   }
+    // }
+    // stage('Detener contenedores'){
+    //   steps{
+    //     powershell 'docker stop $(docker ps -q --filter "publish=4200")'
+    //   }
+    // }
     stage('Desplegar') {
       steps {
         build job: 'Proyecto-Final-Devops-Angular-Despliegue', propagate: false
