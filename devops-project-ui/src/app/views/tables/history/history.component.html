@@ -1,3 +1,118 @@
-<p>
-  history works!
-</p>
+<body>
+  <div class="container view">
+
+    <div class="mb-3">
+      <h1>Tabla de historial</h1>
+    </div>
+
+    <table class="table table-hover table-bordered text-center">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Fecha de cambio</th>
+          <th scope="col">Detalle de cambio</th>
+          <th scope="col">Responsable</th>
+          <th scope="col">Proyecto Asignado</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of historyArray">
+          <td>{{ item.id }}</td>
+          <td>{{ item.fecha_cambio }}</td>
+          <td>{{ item.detalle_cambio }}</td>
+          <td>{{ item.responsable}}</td>
+          <td>{{ item.proyecto_asignado }}</td>
+
+          <td>
+            <a (click)="openEditorPopup(item)" type="button" class="btn btn-warning">Editar</a>
+          </td>
+          <td>
+            <a (click)="deleteHistory(item.id)" type="button" class="btn btn-danger">Eliminar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a type="button" class="btn btn-primary" (click)="openAddPopup()">Agregar</a>
+  </div>
+
+  <div class="container popupAdd">
+    <div class="popup-contentAdd">
+
+      <button class="close-button" (click)="closeAddPopup()">X</button>
+
+      <h1>Agregar historial</h1>
+      <form (ngSubmit)="createHistory()" [formGroup]="formItem">
+
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Fecha de Cambio</label>
+          <input type="text" class="form-control" formControlName="fecha_cambio" [(ngModel)]="historyData.fecha_cambio"
+            placeholder="Fecha del Cambio">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Detalle del Cambio</label>
+          <input type="text" class="form-control" formControlName="detalle_cambio" [(ngModel)]="historyData.detalle_cambio"
+            placeholder="Detalles">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Responsable</label>
+          <input type="number" class="form-control" formControlName="responsable" [(ngModel)]="historyData.responsable"
+            placeholder="Responsable">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Proyecto asignado</label>
+          <input type="number" class="form-control" formControlName="proyecto_asignado" [(ngModel)]="historyData.proyecto_asignado"
+            placeholder="Proyecto">
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Agregar</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="container popupEdit">
+
+    <div class="popup-contentEdit">
+      
+      <button class="close-button" (click)="closeEditorPopup()">X</button>
+
+      <h1>Editar Historial</h1>
+      <form (ngSubmit)="editHistory()" [formGroup]="formItem">
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Fecha de Cambio</label>
+          <input type="text" class="form-control" formControlName="fecha_cambio" [(ngModel)]="historyData.fecha_cambio"
+            placeholder="Fecha de Cambio" [value]="editingElement.fecha_cambio">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Detalle del Cambio</label>
+          <input type="text" class="form-control" formControlName="detalle_cambio" [(ngModel)]="historyData.detalle_cambio"
+            placeholder="Detalle del cambio" [value]="editingElement.detalle_cambio">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Responsable</label>
+          <input type="number" class="form-control" formControlName="responsable" [(ngModel)]="historyData.responsable"
+            placeholder="Responsable" [value]="editingElement.responsable">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Proyecto Asignado</label>
+          <input type="number" class="form-control" formControlName="proyecto_asignado" [(ngModel)]="historyData.proyecto_asignado"
+            placeholder="Proyecto" [value]="editingElement.proyecto_asignado">
+        </div>
+
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Actualizar</button>
+      </form>
+    </div>
+  </div>
+
+</body>
