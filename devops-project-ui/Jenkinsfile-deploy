@@ -1,6 +1,11 @@
 pipeline {
   agent any
   stages {
+    stage('Ingresar en la carpeta del proyecto'){
+        steps {
+            powershell 'cd devops-project-ui'
+        }
+    }
     stage('Construir y desplegar') {
         steps {
         powershell "docker build -f Dockerfile -t frontend-${env.GIT_BRANCH}:1.0.0-${env.BUILD_NUMBER} ."
