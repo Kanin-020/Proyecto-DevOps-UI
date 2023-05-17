@@ -21,11 +21,11 @@ pipeline {
         powershell 'npm test' 
       }
     }
-    stage('Detener contenedores'){
-      steps{
-        powershell 'docker stop $(docker ps -q --filter "publish=4200")'
-      }
-    }
+    // stage('Detener contenedores'){
+    //   steps{
+    //     powershell 'docker stop $(docker ps -q --filter "publish=4200")'
+    //   }
+    // }
     stage('Desplegar') {
       steps {
         build job: 'Proyecto-Final-Devops-Angular-Despliegue', propagate: false
