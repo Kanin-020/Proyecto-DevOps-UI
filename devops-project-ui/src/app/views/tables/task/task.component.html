@@ -1,3 +1,133 @@
-<p>
-  task works!
-</p>
+<body>
+  <div class="container view">
+
+    <div class="mb-3">
+      <h1>Tabla de tareas</h1>
+    </div>
+
+    <table class="table table-hover table-bordered text-center">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre de la tarea</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Fecha de entrega</th>
+          <th scope="col">Proyecto asociado</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of taskArray">
+          <td>{{ item.id }}</td>
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.descripcion }}</td>
+          <td>{{ item. estado}}</td>
+          <td>{{ item.fecha_entrega }}</td>
+          <td>{{ item.proyecto_asociado }}</td>
+          <td>
+            <a (click)="openEditorPopup(item)" type="button" class="btn btn-warning">Editar</a>
+          </td>
+          <td>
+            <a (click)="deleteTask(item.id)" type="button" class="btn btn-danger">Eliminar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a type="button" class="btn btn-primary" (click)="openAddPopup()">Agregar</a>
+  </div>
+
+  <div class="container popupAdd">
+    <div class="popup-contentAdd">
+
+      <button class="close-button" (click)="closeAddPopup()">X</button>
+
+      <h1>Agregar tarea</h1>
+      <form (ngSubmit)="createTask()" [formGroup]="formItem">
+
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+          <input type="text" class="form-control" formControlName="nombre" [(ngModel)]="taskData.nombre"
+            placeholder="Nombre de la tarea">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Descripcion</label>
+          <input type="text" class="form-control" formControlName="descripcion" [(ngModel)]="taskData.descripcion"
+            placeholder="Descripcion">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Estado</label>
+          <input type="text" class="form-control" formControlName="estado" [(ngModel)]="taskData.estado"
+            placeholder="Estado">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Fecha de entrega</label>
+          <input type="text" class="form-control" formControlName="fecha_entrega" [(ngModel)]="taskData.fecha_entrega"
+            placeholder="Fecha de entrega">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Proyecto Asociado</label>
+          <input type="number" class="form-control" formControlName="proyecto_asociado"
+            [(ngModel)]="taskData.proyecto_asociado" placeholder="Proyecto asociado">
+        </div>
+
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Agregar</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="container popupEdit">
+
+    <div class="popup-contentEdit">
+      
+      <button class="close-button" (click)="closeEditorPopup()">X</button>
+
+      <h1>Editar tarea</h1>
+      <form (ngSubmit)="editTask()" [formGroup]="formItem">
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+          <input type="text" class="form-control" formControlName="nombre" [(ngModel)]="taskData.nombre"
+            placeholder="Nombre de la tarea" [value]="editingElement.nombre">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Descripcion</label>
+          <input type="text" class="form-control" formControlName="descripcion" [(ngModel)]="taskData.descripcion"
+            placeholder="Descripcion" [value]="editingElement.descripcion">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Estado</label>
+          <input type="text" class="form-control" formControlName="estado" [(ngModel)]="taskData.estado"
+            placeholder="Estado" [value]="editingElement.estado">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Fecha de entrega</label>
+          <input type="text" class="form-control" formControlName="fecha_entrega" [(ngModel)]="taskData.fecha_entrega"
+            placeholder="Fecha de entrega" [value]="editingElement.fecha_entrega">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Proyecto Asociado</label>
+          <input type="number" class="form-control" formControlName="proyecto_asociado"
+            [(ngModel)]="taskData.proyecto_asociado" placeholder="Proyecto asociado"
+            [value]="editingElement.proyecto_asociado">
+        </div>
+
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Actualizar</button>
+      </form>
+    </div>
+  </div>
+
+</body>
