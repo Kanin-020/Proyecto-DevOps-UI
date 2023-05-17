@@ -6,7 +6,7 @@ COPY . .
 
 RUN npm install
 
-ENV PORT=4200
+RUN npm run build
 
 EXPOSE 4200
 
