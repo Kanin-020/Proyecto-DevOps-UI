@@ -62,17 +62,28 @@ export class TaskComponent implements OnInit {
 
     var { nombre, descripcion, estado, fecha_entrega, proyecto_asociado } = this.taskData;
 
-    if (!nombre || !descripcion || !estado || !fecha_entrega || !proyecto_asociado) {
+    if(!nombre){
       nombre = this.editingElement.nombre;
-      descripcion = this.editingElement.descripcion;
-      estado = this.editingElement.estado;
-      fecha_entrega = this.editingElement.fecha_entrega;
-      proyecto_asociado = this.editingElement.proyecto_asociado;
     }
 
+    if(!descripcion){
+      descripcion = this.editingElement.descripcion;
+    }
+
+    if (!estado){
+    estado = this.editingElement.estado;
+    }
+
+    if(!fecha_entrega){
+      fecha_entrega = this.editingElement.fecha_entrega;
+    }
+
+    if(!proyecto_asociado){
+      proyecto_asociado = this.editingElement.proyecto_asociado;
+    }
+    
     this.taskService.updateTaskInfo(id, nombre, descripcion, estado, fecha_entrega, proyecto_asociado).subscribe(
       (response: any) => {
-        console.log(response);
         return response;
       }
     );

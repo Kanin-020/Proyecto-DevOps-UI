@@ -46,9 +46,13 @@ export class UserComponent implements OnInit {
 
     var { username, email, password } = this.userData;
 
-    if (!username || !email || !password) {
+    if(!username){
       username = this.editingElement.username;
+    }
+    if(!email){
       email = this.editingElement.email;
+    }
+    if(!password){
       password = this.editingElement.password;
     }
 

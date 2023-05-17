@@ -1,3 +1,133 @@
-<p>
-  comment works!
-</p>
+<body>
+  <div class="container view">
+
+    <div class="mb-3">
+      <h1>Tabla de comentarios</h1>
+    </div>
+
+    <table class="table table-hover table-bordered text-center">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Autor</th>
+          <th scope="col">Contenido</th>
+          <th scope="col">Fecha de creacion</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Tarea Asociada</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of commentArray">
+          <td>{{ item.id }}</td>
+          <td>{{ item.autor }}</td>
+          <td>{{ item.contenido }}</td>
+          <td>{{ item.fecha}}</td>
+          <td>{{ item.estado }}</td>
+          <td>{{ item.tarea_asociada }}</td>
+          <td>
+            <a (click)="openEditorPopup(item)" type="button" class="btn btn-warning">Editar</a>
+          </td>
+          <td>
+            <a (click)="deleteComment(item.id)" type="button" class="btn btn-danger">Eliminar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a type="button" class="btn btn-primary" (click)="openAddPopup()">Agregar</a>
+  </div>
+
+  <div class="container popupAdd">
+    <div class="popup-contentAdd">
+
+      <button class="close-button" (click)="closeAddPopup()">X</button>
+
+      <h1>Agregar comentario</h1>
+      <form (ngSubmit)="createComment()" [formGroup]="formItem">
+
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Autor</label>
+          <input type="text" class="form-control" formControlName="autor" [(ngModel)]="commentData.autor"
+            placeholder="Autor del comentario">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Contenido</label>
+          <input type="text" class="form-control" formControlName="contenido" [(ngModel)]="commentData.contenido"
+            placeholder="Contenido">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Fecha</label>
+          <input type="text" class="form-control" formControlName="fecha" [(ngModel)]="commentData.fecha"
+            placeholder="Fecha de creacion">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Estado</label>
+          <input type="text" class="form-control" formControlName="estado" [(ngModel)]="commentData.estado"
+            placeholder="Estado">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Tarea asociada</label>
+          <input type="number" class="form-control" formControlName="tarea_asociada"
+            [(ngModel)]="commentData.tarea_asociada" placeholder="Tarea asociada">
+        </div>
+
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Agregar</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="container popupEdit">
+
+    <div class="popup-contentEdit">
+      
+      <button class="close-button" (click)="closeEditorPopup()">X</button>
+
+      <h1>Editar Comentario</h1>
+      <form (ngSubmit)="editComment()" [formGroup]="formItem">
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Autor</label>
+          <input type="text" class="form-control" formControlName="autor" [(ngModel)]="commentData.autor"
+            placeholder="Autor" [value]="editingElement.autor">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Contenido</label>
+          <input type="text" class="form-control" formControlName="contenido" [(ngModel)]="commentData.contenido"
+            placeholder="Contenido" [value]="editingElement.contenido">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Fecha</label>
+          <input type="text" class="form-control" formControlName="fecha" [(ngModel)]="commentData.fecha"
+            placeholder="Fecha" [value]="editingElement.fecha">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Estado</label>
+          <input type="text" class="form-control" formControlName="estado" [(ngModel)]="commentData.estado"
+            placeholder="Estado" [value]="editingElement.estado">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Tarea Asociada</label>
+          <input type="number" class="form-control" formControlName="tarea_asociada"
+            [(ngModel)]="commentData.tarea_asociada" placeholder="Tarea Asociada"
+            [value]="editingElement.tarea_asociada">
+        </div>
+
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Actualizar</button>
+      </form>
+    </div>
+  </div>
+
+</body>
