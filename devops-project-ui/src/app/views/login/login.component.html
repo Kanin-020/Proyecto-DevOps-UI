@@ -1,0 +1,25 @@
+<body class="text-center">
+
+  <main class="form-signin">
+      <form (ngSubmit)="login()" [formGroup]="formItem">
+          <img class="mb-4" src="../../../assets/Logo.jpg" alt="" width="90" height="150">
+          <h1 class="h3 mb-3 fw-normal">Iniciar Sesión</h1>
+
+          <div class="form-floating">
+              <input type="text" class="form-control" formControlName="username" [(ngModel)]="userData.username" required>
+              <label for="floatingInput"></label>
+          </div>
+
+          <div class="form-floating">
+              <input type="password" class="form-control" formControlName="password" [(ngModel)]="userData.password" placeholder="Contraseña" required>
+              <label for="floatingPassword"></label>
+          </div>
+
+          <br>
+          <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="formItem.invalid">Entrar</button>
+          <a href="register">Registrarse</a>
+          <p class="mt-5 mb-3 text-muted">©2023</p>
+
+      </form>
+  </main>
+</body>

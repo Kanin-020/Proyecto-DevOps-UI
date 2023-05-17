@@ -1,0 +1,70 @@
+<body>
+  <div class="container view">
+
+    <div class="mb-3">
+      <h1>Tabla de usuarios</h1>
+    </div>
+
+    <table class="table table-hover table-bordered text-center">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre de usuario</th>
+          <th scope="col">Email</th>
+          <th scope="col">Contraseña</th>
+          <th scope="col">Ultimo inicio de sesión</th>
+          <th scope="col">Fecha de registro</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of userArray">
+          <td>{{ item.id }}</td>
+          <td>{{ item.username }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item. password}}</td>
+          <td>{{ item.lastLoginDate }}</td>
+          <td>{{ item.createdDate }}</td>
+          <td>
+            <a (click)="openPopup(item)" type="button" class="btn btn-warning">Editar</a>
+          </td>
+          <td>
+            <a (click)="deleteUser(item.id)" type="button" class="btn btn-danger">Eliminar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="container popup">
+
+    <div class="popup-content">
+      <button class="close-button" (click)="closePopup()">X</button>
+
+      <form (ngSubmit)="editUser()" [formGroup]="formItem">
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Usuario</label>
+          <input type="text" class="form-control" formControlName="username" [(ngModel)]="userData.username"
+            placeholder="Usuario" [value]="editingElement.username">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Email</label>
+          <input type="email" class="form-control" formControlName="email" [(ngModel)]="userData.email"
+            placeholder="Email" [value]="editingElement.email">
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
+          <input type="text" class="form-control" formControlName="password" [(ngModel)]="userData.password"
+            placeholder="Contraseña" [value]="editingElement.password">
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Actualizar</button>
+      </form>
+    </div>
+  </div>
+
+</body>

@@ -1,0 +1,38 @@
+<body class="text-center">
+  <main class="form-signin">
+      <form (ngSubmit)="userRegister()" [formGroup]="formItem">
+
+          <img class="mb-4" src="../../../assets/Logo.jpg" alt="" width="90" height="150">
+          <h1 class="h3 mb-3 fw-normal">Registrarse</h1>
+
+          <div class="form-floating">
+              <input type="text" class="form-control" formControlName="username" [(ngModel)]="userData.username" placeholder="Usuario" required>
+              <label for="floatingInput"></label>
+          </div>
+          
+          <div class="form-floating">
+            <input type="email" class="form-control" formControlName="email" [(ngModel)]="userData.email" placeholder="Correo" required>
+              <label for="floatingPassword"></label>
+          </div>
+          
+          <div class="form-floating">
+            <input type="text" class="form-control" formControlName="password" [(ngModel)]="userData.password" placeholder="Contraseña" required>
+              <label for="floatingPassword"></label>
+          </div>
+          
+          <div class="form-floating">
+            <input type="text" class="form-control" formControlName="passwordConfirmation" [(ngModel)]="userData.passwordConfirmation" placeholder="Confirmar contraseña" required>
+              <label for="floatingPassword"></label>
+          </div>
+
+          <br>
+
+          <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="formItem.invalid">Registrarse</button>
+
+          <a class="regresar" href="/">Regresar</a>
+
+          <p class="mt-5 mb-3 text-muted">©2023</p>
+          
+      </form>
+  </main>
+</body>
