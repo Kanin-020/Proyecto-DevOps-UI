@@ -6,11 +6,6 @@ pipeline {
           git branch: 'develop', url: 'https://github.com/Kanin-020/Proyecto-DevOps-UI.git'
         }
       }
-    stage('Ingresar en la carpeta del proyecto'){
-        steps {
-            powershell 'cd devops-project-ui'
-        }
-    }
     stage('Instalar dependencias') {
       steps {
         powershell 'npm install'
