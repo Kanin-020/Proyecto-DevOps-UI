@@ -18,12 +18,13 @@ pipeline {
     }
     stage('Detener contenedores') {
       steps {
+        powershell(
         $containers = docker ps -q --filter 'publish=4200'
         if ($containers) {
           docker stop $containers
         } else {
           echo(message: 'No se encontraron contenedores en el puerto 4200.')  
-        }
+        })
       }
     }
     stage('Desplegar') {
