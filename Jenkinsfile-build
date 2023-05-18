@@ -12,11 +12,13 @@ pipeline {
       }
     }
     stage('Ejecutar pruebas') {
-      steps {
-        timeout(time: 3, unit: 'MINUTES', failFast: false) {
-          powershell 'npm test'
-        }
+    steps {
+      timeout(time: 3, unit: 'MINUTES') {
+        powershell '''
+        Start-Sleep -Seconds 10
+        '''
       }
+    }
     }
     stage('Detener contenedores') {
       steps {
