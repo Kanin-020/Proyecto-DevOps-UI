@@ -103,6 +103,7 @@ export class CommentComponent implements OnInit {
 
     if (popup) {
       popup.style.display = "block";
+      console.log(popup.style.display);
     }
 
   }

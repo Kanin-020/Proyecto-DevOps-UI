@@ -9,7 +9,7 @@ import { SessionGuard } from 'src/app/guards/session.guard';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private sessionGuard: SessionGuard) { }
+  constructor() { }
 
   ngOnInit() {
   }
