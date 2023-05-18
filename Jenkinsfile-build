@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Ejecutar pruebas') {
       steps {
-        timeout(time: 3, unit: 'MINUTES' failFast: false) {
+        timeout(time: 3, unit: 'MINUTES', failFast: false) {
           powershell 'npm test'
         }
       }
