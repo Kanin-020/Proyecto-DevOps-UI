@@ -16,9 +16,14 @@ pipeline {
         powershell 'npm test' 
       }
     }
-     stage('Detener contenedores'){
+    stage('Detener contenedores') {
       steps {
-        powershell -Command "$containers = docker ps -q --filter 'publish=4200'; if ($containers) { docker stop $containers } else { Write-Host 'No se encontraron contenedores en el puerto 4200.' }"
+        $containers = docker ps -q --filter 'publish=4200'
+        if ($containers) {
+          docker stop $containers
+        } else {
+          Write-Host 'No se encontraron contenedores en el puerto 4200.'
+        }
       }
     }
     stage('Desplegar') {
