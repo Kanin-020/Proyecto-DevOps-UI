@@ -13,16 +13,7 @@ pipeline {
     }
     stage('Ejecutar pruebas') {
     steps {
-      timeout(time: 3, unit: 'MINUTES') {
-        powershell '''
-        Start-Sleep -Seconds 10
-        '''
-      }
-    }
-    }
-    stage('Detener contenedores') {
-      steps {
-        powershell 'docker stop $(docker ps -q --filter "label=project=frontend")'
+        powershell 'npm test --parallel'
       }
     }
     stage('Desplegar') {
