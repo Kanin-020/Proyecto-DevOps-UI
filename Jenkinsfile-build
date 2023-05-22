@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Ejecutar pruebas') {
     steps {
-        powershell 'npm test --parallel'
+        powershell 'npm test:ci'
       }
     }
     stage('Desplegar') {
