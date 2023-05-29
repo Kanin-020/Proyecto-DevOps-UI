@@ -9,9 +9,8 @@ pipeline {
     }
     stage('Desplegar'){
         steps {
-          powershell '$location = ${env.WORKSPACE}'
+          def location = env.WORKSPACE
           powershell 'Write-Output ${location}'
-          powershell 'Write-Output "Salida"'
           powershell 'pscp -r ${location} jorge@192.168.1.95:/var/www/devopshot'
         }
         }
