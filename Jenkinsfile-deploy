@@ -1,11 +1,17 @@
 pipeline {
   agent any
   stages {
-    stage('Construir y desplegar') {
+    stage('Construir') {
         steps {
-        powershell "docker build -f Dockerfile -t frontend-${env.GIT_BRANCH}:1.0.0-${env.BUILD_NUMBER} ."
-        powershell "docker run --restart=always -p 4200:4200 -d frontend-${env.GIT_BRANCH}:1.0.0-${env.BUILD_NUMBER}"
+        powershell 'npm install'
+        powershell 'npm build'
       }
+    }
+    stage('Desplegar'){
+        steps {
+          powershell 'scp -r dist jorge@192.168.1.95/24:/var/www/devopshot'
+        }
     }
   }
 }
+
