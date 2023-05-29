@@ -4,7 +4,7 @@ pipeline {
     stage('Construir') {
         steps {
         powershell 'npm install'
-        powershell 'npm build'
+        powershell 'npm run build'
       }
     }
     stage('Desplegar'){
