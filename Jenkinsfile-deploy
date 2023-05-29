@@ -9,7 +9,7 @@ pipeline {
     }
     stage('Desplegar'){
         steps {
-          powershell 'scp -r dist jorge@192.168.1.95/24:/var/www/devopshot'
+          powershell 'scp -r dist jorge@192.168.1.95:/var/www/devopshot'
         }
     }
   }
