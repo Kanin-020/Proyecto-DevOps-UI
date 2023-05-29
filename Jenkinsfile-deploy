@@ -9,7 +9,7 @@ pipeline {
     }
     stage('Desplegar'){
         steps {
-          powershell '$location = Get-Location'
+          powershell '$location = (Get-Location)'
           powershell 'Write-Output ${location}/dist'
           powershell 'pscp -r ${location}/dist jorge@192.168.1.95:/var/www/devopshot'
         }
