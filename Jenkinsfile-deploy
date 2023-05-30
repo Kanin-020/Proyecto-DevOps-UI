@@ -9,7 +9,7 @@ pipeline {
     }
     stage('Desplegar'){
         steps {
-          powershell 'pscp -r C:\Users\John 117\.jenkins\workspace\Proyecto-Final-Devops-Angular-Despliegue jorge@192.168.1.95:/var/www/devopshot'
+          powershell 'pscp -r "C:/Users/John 117/.jenkins/workspace/Proyecto-Final-Devops-Angular-Despliegue" jorge@192.168.1.95:/var/www/devopshot'
         }
         }
     }
