@@ -9,7 +9,8 @@ pipeline {
     }
     stage('Desplegar'){
         steps {
-          powershell 'pscp -r ${env.WORKSPACE} jorge@192.168.1.95:/var/www/devopshot'
+          powershell '$location = Get-Location'
+          powershell 'pscp -r ${location} jorge@192.168.1.95:/var/www/devopshot'
         }
         }
     }
